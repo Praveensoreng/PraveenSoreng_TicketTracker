@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<title>Insert title here</title>
+</head>
+<body class="text-bg-light">
+<div th:replace="~{header :: navbar}"></div>
+
+<!-- <div th:object="${ticketDto}" class="card text-bg-light mt-5" style="max-width: 18rem;">
+  <div class="card-header">Title: <span th:text=*{ticketTitle}></span></div>
+  <div class="card-body">
+    <h5 class="card-title">Short Description:</h5>
+    <p th:text="*{ticketDescription}" class="card-text"></p>
+    
+     <h5 class="card-title">Content:</h5>
+     <p th:utext=*{content} class="card-text"></p>
+  </div>
+</div> -->
+
+
+<div th:object="${ticketDto}" class=" mt-5 ms-3"> 
+<h1 class="text-decoration-underline fw-light">Title:<span th:text="*{ticketTitle}"></span> </h1>
+<p> Created on: <span th:text="${#temporals.format(ticketDto.createdOn,'dd/MM/yyyy, HH:mm')}"></span></p>
+<h3 class="mt-3 fw-light">Short Description:</h1>
+<p th:text="*{ticketDescription}"></p>
+
+<h3 class="fw-light">Content:</h1>
+<p th:utext="*{content}"></p>
+</div>
+
+<div th:replace="~{footer2 :: footer2}"></div>
+
+</body>
+</html>

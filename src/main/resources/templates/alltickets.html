@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<title>Insert title here</title>
+</head>
+<body class="text-bg-light">
+	<div th:replace="~{header :: navbar}"></div>
+
+	<div class="container">
+		<h3 class="fw-light">Search Tickets</h3>
+		
+		<form th:action="@{/searchTickets}">
+		<div class="row g-3 align-items-center">
+
+			<div class="col-auto">
+				<input type="text" class="form-control" name="query">
+			</div>
+
+			<div class="col-auto">
+				<button type="submit" class="btn btn-primary"
+					style="--bs-btn-padding-y: .50rem; --bs-btn-padding-x: 1rem; --bs-btn-font-size: 1rem;">
+					Search</button>
+			</div>
+
+		</div>
+		</form>
+		
+		
+	</div>
+
+   <div class="container mt-4"><h3 class="fw-light">List of Tickets</h3></div>
+	<div class="container">
+
+		<table class="table table-striped table-hover text-center">
+
+			<thead>
+				<tr>
+					<th class="bg-danger-subtle">#</th>
+					<th class="bg-danger-subtle">Ticket Title</th>
+					<th class="bg-danger-subtle">Ticket Short Description</th>
+					<th class="bg-danger-subtle">Ticket Created On</th>
+					<th class="bg-danger-subtle">Actions</th>
+				</tr>
+			</thead>
+
+			<tbody>
+
+				<tr th:each="var, varStat: ${ticketDto}">
+					<td th:text="${varStat.count}"></td>
+					<td th:text="${var.ticketTitle}"></td>
+					<td th:text="${var.ticketDescription}"></td>
+					<td th:text="${#temporals.format(var.createdOn,'dd/MM/yyyy, HH:mm')}"></td>
+					<td>
+
+						<button type="button" class="btn btn-primary"
+							style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+							<a th:href="@{/edit/{id}(id = ${var.id})}" class="text-white text-decoration-none">Edit</a>
+						</button>	
+                                &nbsp;
+							<button type="button" class="btn btn-danger"
+							style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+							<a th:href="@{/delete/{id}(id = ${var.id})}" class="text-white text-decoration-none">Delete</a>
+						</button>	
+						&nbsp;
+						<button type="button" class="btn btn-success"
+							style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+							<a th:href="@{/viewTicket/{id}(id = ${var.id})}" class="text-white text-decoration-none">View</a>
+						</button>	
+					</td>
+				</tr>
+			</tbody>
+
+
+
+		</table>
+
+
+	</div>
+
+	<div th:replace="~{footer2 :: footer2}"></div>
+
+
+
+</body>
+</html>
